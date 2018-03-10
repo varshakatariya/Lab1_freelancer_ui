@@ -6,7 +6,7 @@ export class App extends React.Component{
         return (
 
             <div>
-                <ProjectDetailsView />
+                <ProjectDetailsView email="varshhakataria@gmail.com"/>
             </div>
 
         );

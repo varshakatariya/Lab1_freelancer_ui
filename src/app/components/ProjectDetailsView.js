@@ -1,6 +1,7 @@
 import React from "react";
 import {render} from "react-dom";
 import axios from "axios";
+import PropTypes from 'prop-types';
 
 export class ProjectDetailsView extends React.Component{
     constructor(props){
@@ -16,7 +17,9 @@ export class ProjectDetailsView extends React.Component{
         }
     }
     componentWillMount(){
-        axios.get('http://localhost:3000/project')
+        axios.get('http://localhost:3000/project',{
+            params: {email: this.props.email}
+        })
             .then(response => {
                 console.log("",response);
                 console.log("Title : ",response.data.projectName);
@@ -70,6 +73,7 @@ export class ProjectDetailsView extends React.Component{
                     <div className="row">
                         Number Of Bids : {this.state.numberOfBids}
                     </div>
+                    {this.props.email}
                 </div>
             </div>
         );
@@ -77,3 +81,7 @@ export class ProjectDetailsView extends React.Component{
 }
 
 export default ProjectDetailsView;
+
+ProjectDetailsView.propTypes = {
+    email: PropTypes.string
+};
