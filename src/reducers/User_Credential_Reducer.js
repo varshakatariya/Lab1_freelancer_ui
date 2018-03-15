@@ -6,7 +6,8 @@ export const data = (state =  {
     name: "",
     phone:"",
     about:"",
-    skills:""
+    skills:"",
+    profileImage:""
 }, action) =>{
 
     switch (action.type) {
@@ -18,7 +19,8 @@ export const data = (state =  {
                 name:action.payload.name,
                 phone:action.payload.phone,
                 about:action.payload.about,
-                skills:action.payload.skills
+                skills:action.payload.skills,
+                profileImage: action.payload.profileImage
             };
 
 

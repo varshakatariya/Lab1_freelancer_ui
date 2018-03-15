@@ -7,7 +7,6 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import UserProfile from "./components/UserProfile";
 import PostProject from "./components/PostProject";
-import UserProfileTest from "./components/profileTest";
 import Home from "./components/Home";
 import {Link} from 'react-router-dom';
 import Dashboard from "./components/Dashboard";
@@ -29,7 +28,6 @@ class App extends Component {
                   <Route path={`/signup`} component={Signup}></Route>
                   <Route path={`/login`} component={Login}></Route>
                   <Route path={`/profile`} component={UserProfile}></Route>
-                  <Route path={`/profileTest`} component={UserProfileTest}></Route>
                   <Route path={`/home`} component={Home}></Route>
                   <Route path={`/dashboard`} component={Dashboard}></Route>
               </div>
