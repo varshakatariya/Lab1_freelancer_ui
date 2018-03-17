@@ -51,11 +51,6 @@ class Dashboard extends React.Component{
     componentWillMount(){
         this.props.checkSession();
         this.props.getListProjectUserHasBidOn();
-
-        var x = document.getElementById("employerView");
-        if(x != null) {
-            x.style.display = "block";
-        }
     }
 
     onHandleChangeFreelancer(){
@@ -70,6 +65,7 @@ class Dashboard extends React.Component{
         var x = document.getElementById("employerView");
         if (x.style.display === "none") {
             x.style.display = "block";
+
         } else {
             x.style.display = "none";
         }
@@ -96,14 +92,14 @@ class Dashboard extends React.Component{
                 </label>
 
                 <label>
-                    <input type="Radio" name="view" onClick={this.onHandleChangeFreelancer.bind()}></input> Employer
+                    <input type="Radio" name="view" onClick={this.onHandleChangeEmployer.bind()}></input> Employer
                 </label>
 
                 <div id="freelancerView">
-                    <Dashboard_Employer/>
+                    <Dashboard_Freelancer/>
                 </div>
                 <div id="employerView">
-                    <Dashboard_Freelancer/>
+                    <Dashboard_Employer/>
                 </div>
             </div>
         );

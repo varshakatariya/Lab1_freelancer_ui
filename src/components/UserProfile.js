@@ -7,12 +7,13 @@ import * as getData from '../actions/user_creadential_actions';
 //import feelancer from '../feelancer-LOGO.svg';
 //import {userData} from "../reducers/reducer-user";
 import Dropzone from 'react-dropzone';
+import {Link} from 'react-router-dom';
 
 class UserProfile extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { redirect: false, profileImage:[] ,preview: null, docs: []};
+        this.state = { redirect: false, profileImage:null ,preview: null, docs:null, docsPreview: null};
         this.onImageDrop = this.onImageDrop.bind(this);
         this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
     }
@@ -54,20 +55,21 @@ class UserProfile extends React.Component {
         return true;
     }
 
-    fileSelectedHandler(event) {
+    fileSelectedHandler(e) {
+        this.state.docs = e.target.files[0];
         this.setState({
-                docs: event.target.files
-        });
+            docs: this.state.docs
+        })
+        console.log("selected file path : ",this.state.docs);
     }
 
     onImageDrop(file) {
         this.setState({
-            profileImage: file,
+            profileImage: file[0],
             preview: file[0].preview
-        });
-        console.log("file path : ",file[0]);
+        })
+        console.log("Image file path : ",this.state.profileImage);
     }
-
 
 
     render(){
@@ -80,6 +82,11 @@ class UserProfile extends React.Component {
 
         return(
         <div>
+            <nav class="bar nav-black">
+                <Link to="/home" class="item-button bar-item ml75">Home</Link>
+                <Link to="/dashboard" class="item-button bar-item">Dashboard</Link>
+                <Link to="/profile" class="item-button bar-item">User Profile</Link>
+            </nav>
             <div className="display-flex justify-content-md-center mt40">
                 <div className="col-md-8 form-border mt30">
                     <div onClick={this.logout.bind(this)}>LOGOUT</div>
@@ -90,9 +97,7 @@ class UserProfile extends React.Component {
                         <img src={ this.state.preview } alt="image preview" />
 
                         }
-                        <img src="data:image/*;base64, VzI5aWFtVmpkQ0JQWW1wbFkzUmQ="/>
 
-                        <br/>
                     </div>
                     <div className="row">
                         <Dropzone style="height: 50px"
@@ -185,6 +190,9 @@ class UserProfile extends React.Component {
                             onChange={this.fileSelectedHandler.bind(this)}
                         />
                     </div>
+                    { this.state.docsPreview &&
+                    <img src={ this.state.docsPreview } alt="image preview" />
+                    }
                     <button className="btn btn-primary" onClick={this.updateUserDetails.bind(this)}>Update Details</button>
                 </div>
             </div>

@@ -25,6 +25,7 @@ class Login extends React.Component{
     login(e){
         e.preventDefault();
         this.setState({errors:""});
+
         this.props.userLogin(this.state).then(
             (data) => {
                 this.setState({
@@ -39,7 +40,7 @@ class Login extends React.Component{
     render(){
         if (this.state.redirect)
             return (<Redirect to={{
-                pathname: '/profile'
+                pathname: '/home'
             }} />)
         const {userLogin} = this.props;
         const {errors} = this.state;

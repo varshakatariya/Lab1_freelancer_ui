@@ -39,7 +39,7 @@ class Home extends React.Component{
         }
         if(nextProps.projectData){
             this.setState({
-               listOfProject : nextProps.projectData.data.listOfProjects
+                listOfProject : nextProps.projectData.data.listOfProjects
             });
         }
     }
@@ -68,6 +68,7 @@ class Home extends React.Component{
 
     bidNow(id){
         var bidData = {};
+        console.log("Project ID -----------------",id);
         bidData.project_id = id;
         bidData.period_in_days = this.state.period_in_days;
         bidData.bid_price = this.state.bid_price;
@@ -119,35 +120,35 @@ class Home extends React.Component{
                         {this.state.listOfProject.map((projectDetail,i) =>
                             <h5 key={i}>
                                 <div className="row row-border mt20 ml7 mr7">
-                                <Link to={'/project-details/'+projectDetail.project_id} className="col-md-2 mt15 mb15">{projectDetail.title}</Link>
-                                <div className="col-md-2 mt15 mb15">{projectDetail.description}</div>
-                                <div className="col-md-2 mt15 mb15">{projectDetail.skills}</div>
-                                <Link to={'/view-details/'+projectDetail.employer_id} className="col-md-2 mt15 mb15">{projectDetail.employer_name}</Link>
-                                <div className="col-md-1 mt15 mb15">{projectDetail.avg_bid}</div>
-                                <div className="col-md-2 mt15 mb15 ml60">
-                                    <button className="btn btn-primary" onClick={() => this.bid(projectDetail.project_id)}>Bid Project</button>
-                                    <div id={"bid-details"+projectDetail.project_id} className="mt10" style={{display:'none'}}>
-                                    <input
-                                        placeholder="Enter Period"
-                                        className="form-control col-md-10 mt10"
-                                        type="text"
-                                        name="period_in_days"
-                                        required
-                                        label=""
-                                        onChange={this.onChange.bind(this)}
-                                        />
-                                    <input
-                                        placeholder="Enter Amount"
-                                        className="form-control col-md-10 mt10"
-                                        type="text"
-                                        name="bid_price"
-                                        required
-                                        label=""
-                                        onChange={this.onChange.bind(this)}
-                                        />
-                                        <button className="btn btn-primary mt10" onClick={() => this.bidNow(projectDetail.project_id)}>Bid Now</button>
+                                    <Link to={'/project-details/'+projectDetail.project_id} className="col-md-2 mt15 mb15">{projectDetail.title}</Link>
+                                    <div className="col-md-2 mt15 mb15">{projectDetail.description}</div>
+                                    <div className="col-md-2 mt15 mb15">{projectDetail.skills}</div>
+                                    <Link to={'/view-details/'+projectDetail.employer_id} className="col-md-2 mt15 mb15">{projectDetail.employer_name}</Link>
+                                    <div className="col-md-1 mt15 mb15">{projectDetail.avg_bid}</div>
+                                    <div className="col-md-2 mt15 mb15 ml60">
+                                        <button className="btn btn-primary" onClick={() => this.bid(projectDetail.project_id)}>Bid Project</button>
+                                        <div id={"bid-details"+projectDetail.project_id} className="mt10" style={{display:'none'}}>
+                                            <input
+                                                placeholder="Enter Period"
+                                                className="form-control col-md-10 mt10"
+                                                type="text"
+                                                name="period_in_days"
+                                                required
+                                                label=""
+                                                onChange={this.onChange.bind(this)}
+                                            />
+                                            <input
+                                                placeholder="Enter Amount"
+                                                className="form-control col-md-10 mt10"
+                                                type="text"
+                                                name="bid_price"
+                                                required
+                                                label=""
+                                                onChange={this.onChange.bind(this)}
+                                            />
+                                            <button className="btn btn-primary mt10" onClick={() => this.bidNow(projectDetail.project_id)}>Bid Now</button>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </h5>)}
                     </div>
@@ -170,4 +171,3 @@ function mapDispatchToProps(dispatch){
 
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Home);
-

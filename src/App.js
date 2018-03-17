@@ -10,6 +10,8 @@ import PostProject from "./components/PostProject";
 import Home from "./components/Home";
 import {Link} from 'react-router-dom';
 import Dashboard from "./components/Dashboard";
+import ProjectDetails from "./components/ProjectDetails";
+import ViewDetails from "./components/ViewDetails";
 
 class App extends Component {
   render() {
@@ -30,6 +32,8 @@ class App extends Component {
                   <Route path={`/profile`} component={UserProfile}></Route>
                   <Route path={`/home`} component={Home}></Route>
                   <Route path={`/dashboard`} component={Dashboard}></Route>
+                  <Route path={`/project-details/:project_id`} component={ProjectDetails}></Route>
+                  <Route path={`/view-details/:view_id`} component={ViewDetails}></Route>
               </div>
           </BrowserRouter>
       </div>

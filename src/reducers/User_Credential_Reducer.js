@@ -12,7 +12,7 @@ export const data = (state =  {
 
     switch (action.type) {
         case "USER_INFO":
-            console.log("In User info"+action.payload.email);
+            console.log("In User info",action.payload);
             state= {
                 ...state,
                 email:action.payload.email,
@@ -22,7 +22,8 @@ export const data = (state =  {
                 skills:action.payload.skills,
                 profileImage: action.payload.profileImage
             };
-
+            console.log("In User info after",state);
+break;
 
         case "LOGOUT":
             console.log("in logout"+action.payload.logout);

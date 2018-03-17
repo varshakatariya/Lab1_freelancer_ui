@@ -29,8 +29,10 @@ class PostProject extends React.Component{
                 {key:'Standard',value: 'Standard ($15 - $25 USD)'},
                 {key:'Skilled',value: 'Skilled ($25 - $50 USD)'},
                 {key:'Expert',value: 'Expert ($50 + USD)'}
-            ]
+            ],
+            projectFiles:null
         }
+        this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
     }
 
     componentWillMount(){
@@ -73,6 +75,14 @@ class PostProject extends React.Component{
             return item.key == e.target.value
         })
 
+    }
+
+    fileSelectedHandler(e) {
+        this.state.projectFiles = e.target.files[0];
+        this.setState({
+            projectFiles: this.state.projectFiles
+        })
+        console.log("selected file : ",this.state.projectFiles);
     }
     render(){
 
@@ -150,7 +160,14 @@ class PostProject extends React.Component{
                                 onChange={this.handleDateChange.bind(this)}
                             />
                         </div>
-
+                        <br/>
+                        <div className="mb30">
+                            <h4>Project Files</h4>
+                            <input
+                                type="file"
+                                onChange={this.fileSelectedHandler.bind(this)}
+                            />
+                        </div>
                         <button className="btn btn-warning mb30" onClick={this.postProject.bind(this)}>Post My Project</button>
                     </div>
                 </div>

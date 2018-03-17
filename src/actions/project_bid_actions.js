@@ -18,9 +18,29 @@ export function getProjectDataForHome(){
     }
 }
 
+export function getProjectDetails(project_id){
+    return dispatch => {
+        return axios.get('/project/getProjectDetails',{
+            params: {project_id: project_id}
+        }).then((response)=>{
+            console.log("home data"+ JSON.stringify(response.data));
+            dispatch(projectInfo(response.data));
+        });
+    }
+}
+export function getBids(project_id){
+    return dispatch => {
+        return axios.get('/project/getBids',{
+            params: {project_id: project_id}
+        }).then((response)=>{
+            dispatch(bidsList(response.data));
+        });
+    }
+}
+
 export function bidProjectNow(){
     return dispatch => {
-        return axios.get('/project/bidProjectNow').then((response)=>{
+        return axios.post('/project/bidProjectNow').then((response)=>{
             console.log("Bid Now data"+ JSON.stringify(response.data));
             dispatch(projectListInfo(response.data));
         });
@@ -75,6 +95,12 @@ export function flcrProjectListInfo(values){
     console.log("Inside freelancer project list",values);
     return{
         type:"FLCR_PROJ_LIST",
+        payload:values
+    }
+}
+export function bidsList(values){
+    return{
+        type:"BIDS_LIST",
         payload:values
     }
 }
