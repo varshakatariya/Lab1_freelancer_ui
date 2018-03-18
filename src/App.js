@@ -20,7 +20,7 @@ class App extends Component {
           <BrowserRouter>
               <div>
                   <header className="App-header">
-                      <img src={freelancer} className="App-logo" alt="logo" />
+                      <img src={freelancer} className="App-logo" alt="" />
                   </header>
                   <h1>
                       <div className="top-right2"><Link to="/signup">Sign Up</Link></div>
@@ -36,6 +36,15 @@ class App extends Component {
                   <Route path={`/view-details/:user_id`} component={Employer}></Route>
               </div>
           </BrowserRouter>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <h1 className="blue"><i>Hire Experts / Post project online at Freelancer!!</i></h1>
       </div>
     );
   }

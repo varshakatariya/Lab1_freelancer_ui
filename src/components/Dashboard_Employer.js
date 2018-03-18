@@ -10,7 +10,7 @@ class Dashboard_Employer extends React.Component{
     constructor(props){
         super(props);
         this.state= {
-            listOfProject: [],
+            listOfProjects_emp: [],
             redirect: false
         }
     }
@@ -32,7 +32,7 @@ class Dashboard_Employer extends React.Component{
         if(nextProps.projectData){
             console.log("inside dashboard ------------ "+JSON.stringify(nextProps.projectData.data));
             this.setState({
-                listOfProject : nextProps.projectData.data.listOfProjects
+                listOfProjects_emp : nextProps.projectData.data.listOfProjects_emp
             });
 
         }
@@ -63,12 +63,12 @@ console.log("Employer Project-----------",this.state.listOfProject);
                                 <div className="col-md-1 mt10">Status Of Project</div>
                             </nav>
                             <div className="mt20"></div>
-                            {this.state.listOfProject.map((projectDetail,i) =>
+                            {this.state.listOfProjects_emp.map((projectDetail,i) =>
                                 <h5 key={i}>
                                     <div className="row row-border mt20 ml7 mr7">
-                                        <div className="col-md-2 mt15 mb15">{projectDetail.ProjectName}</div>
-                                        <div className="col-md-2 mt15 mb15">{projectDetail.avg_bid}</div>
-                                        <div className="col-md-2 mt15 mb15">{projectDetail.username}</div>
+                                        <div className="col-md-2 mt15 mb15">{projectDetail.projectName}</div>
+                                        <div className="col-md-3 mt15 mb15">{projectDetail.avg_bid}</div>
+                                        <div className="col-md-2 mt15 mb15">{projectDetail.userName}</div>
                                         <div className="col-md-2 mt15 mb15">{projectDetail.project_completion_date}</div>
                                         <div className="col-md-1 mt15 mb15">{projectDetail.status}</div>
                                     </div>

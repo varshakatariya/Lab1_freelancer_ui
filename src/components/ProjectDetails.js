@@ -26,40 +26,30 @@ class ProjectDetails extends React.Component{
         bidsList:[]
     }
 
-    componentWillReceiveProps(nextProps){
-        console.log("Project Details :=--------------",nextProps.projectData);
-        if(nextProps.userData){
-            if(nextProps.userData.data.sessionActive == true){
-                this.setState ({
-                    redirect : false
+    componentWillReceiveProps(nextProps) {
+        console.log("Project Details :=--------------", nextProps.projectData);
+        if (nextProps.userData) {
+            if (nextProps.userData.data.sessionActive == true) {
+                this.setState({
+                    redirect: false
                 })
-            }else {
+            } else {
                 this.setState({
                     redirect: true
                 })
             }
         }
-        if(nextProps.projectData){
-            console.log("Testing"+JSON.stringify(nextProps.projectData));
-            console.log("BidsList: ==================="+JSON.stringify(nextProps.projectData.data.bidsList));
-            this.state.bidsList = nextProps.projectData.data.bidsList;
+        if (nextProps.projectData) {
+            console.log("Testing" + JSON.stringify(nextProps.projectData));
+            console.log("BidsList: ===================" + JSON.stringify(nextProps.projectData));
+            this.state.bidsList = nextProps.bidsList;
             this.setState({
-                projectDetails : nextProps.projectData.data.projectData,
-                bidsList : nextProps.projectData.data.bidslist,
-                message : nextProps.projectData.data.message
+                projectDetails: nextProps.projectData.data.projectData,
+                bidsList: nextProps.projectData.data.bidsList,
+                message: nextProps.projectData.data.message
             });
-            console.log("projectDetails :"+JSON.stringify(this.state.projectDetails));
-            console.log("BidsList: is equals================="+JSON.stringify(this.state.bidsList));
-        }
-
-        var i = 0;
-        console.log("Bids List",this.state.bidsList);
-        while(i<this.state.bidsList.length){
-            console.log("bid list each row",this.state.bidsList[i]);
-            i++;
         }
     }
-
 
     componentWillMount(){
         this.props.checkSession();
@@ -78,8 +68,6 @@ class ProjectDetails extends React.Component{
         hireData.user_id = project.userId;
         this.props.hireFreelancer(hireData).then(
             (data) => {
-                //console.log(JSON.stringify(data.message));
-                //this.setState({message : data.response.data});
             },
             (err) => {
                 this.setState({errors : err.response.data.error});
@@ -87,10 +75,6 @@ class ProjectDetails extends React.Component{
             });
         console.log(this.props.projectData.data.projectData.isEmployer);
     };
-
-    componentDidMount(){
-
-    }
 
     logout(){
         this.props.logout();
@@ -114,7 +98,6 @@ class ProjectDetails extends React.Component{
         return(
             <div>
                 <div className="App-header">
-                    <img src={freelancer} className="App-logo" alt="logo" />
                     <button className="btn btn-primary logout-btn" onClick={this.logout.bind(this)}>Logout</button>
                 </div>
                 <nav class="bar nav-black">
@@ -160,13 +143,13 @@ class ProjectDetails extends React.Component{
                             </nav>
                             <div className="mt20"></div></div>
                         <div>
-                            {this.state.bidsList.map((projectDetail,i) =>
+                           {this.state.bidsList.map((pd,i) =>
                                 <h5 key={i}>
                                     <div className="row row-border mt20 ml7 mr7">
-                                        <Link to={'/project-details/'+projectDetail.userId} className="col-md-3 mt15 mb15">{projectDetail.name}</Link>
-                                        <div className="col-md-3 mt15 mb15">{projectDetail.bid_price}</div>
-                                        <div className="col-md-3 mt15 mb15">{projectDetail.period_in_days}</div>
-                                        { projectData.data.projectData.isEmployer ?  <div className="col-md-3 mt15 mb15"><button className="btn btn-primary hireBtn" onClick={() => this.hire(projectDetail)}>Hire</button></div> : '' }
+                                        <Link to={'/project-details/'+pd.userId} className="col-md-3 mt15 mb15">{pd.name}</Link>
+                                        <div className="col-md-3 mt15 mb15">{pd.bid_price}</div>
+                                        <div className="col-md-3 mt15 mb15">{pd.period_in_days}</div>
+                                        { projectData.data.projectData.isEmployer ?  <div className="col-md-3 mt15 mb15"><button className="btn btn-primary hireBtn" onClick={() => this.hire(pd)}>Hire</button></div> : '' }
                                     </div>
                                 </h5>
                             )}

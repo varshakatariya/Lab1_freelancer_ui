@@ -68,7 +68,6 @@ class Employer extends React.Component{
         return(
             <div>
                 <div className="App-header">
-                    <img src={freelancer} className="App-logo" alt="logo" />
                     <button className="btn btn-primary logout-btn" onClick={this.logout.bind(this)}>Logout</button>
                 </div>
                 <nav class="bar nav-black">
@@ -79,27 +78,27 @@ class Employer extends React.Component{
                 </nav>
                 <div className="display-flex justify-content-md-center mt40">
                     <div className="col-md-8  justify-content-md-center border-blue form-border mt30">
-                        <h3 className="mb30 mt50">User Details</h3>
+                        <h3 className="mb30 mt50 col-md-6">Employer</h3>
                         <hr/>
                         <div className="col-md-offset-5 mt50">
-                            <label className="font-bold">Name : </label>
-                            <label>{this.state.name}</label>
+                            <label className="font-bold col-md-3">Name : </label>
+                            <label className="col-md-3">{this.state.name}</label>
                         </div>
                         <div className="col-md-offset-5 mt20">
-                            <label className="font-bold">Email : </label>
-                            <label>{this.state.email}</label>
+                            <label className="font-bold col-md-3">Email : </label>
+                            <label className="col-md-3">{this.state.email}</label>
                         </div>
                         <div className="col-md-offset-5 mt20">
-                            <label className="font-bold">Skills Required : </label>
-                            <label>{this.state.skills}</label>
+                            <label className="font-bold col-md-3">Skills Required : </label>
+                            <label className="col-md-3">{this.state.skills}</label>
                         </div>
                         <div className="col-md-offset-5 mt20">
-                            <label className="font-bold">About : </label>
-                            <label>{this.state.about}</label>
+                            <label className="font-bold col-md-3">About : </label>
+                            <label className="col-md-3">{this.state.about}</label>
                         </div>
                         <div className="col-md-offset-5 mt20 mb30">
-                            <label className="font-bold">Phone : </label>
-                            <label>{this.state.phone}</label>
+                            <label className="font-bold col-md-3">Phone : </label>
+                            <label className="col-md-3">{this.state.phone}</label>
                         </div>
                     </div>
                 </div>

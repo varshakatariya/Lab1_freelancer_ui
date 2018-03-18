@@ -58,7 +58,7 @@ class Dashboard_Freelancer extends React.Component{
                             <nav className="row bar nav-black">
                                 <div className="col-md-2 mt10">Project Name</div>
                                 <div className="col-md-3 mt10">Employer</div>
-                                <div className="col-md-2 mt10">Avg Bid</div>
+                                <div className="col-md-2 mt10">Average Bid</div>
                                 <div className="col-md-2 mt10">Your Bid</div>
                                 <div className="col-md-1 mt10">Status Of Project</div>
                             </nav>

@@ -119,12 +119,12 @@ class Home extends React.Component{
                 <div className="display-flex justify-content-md-center mt40">
                     <div className="col-md-11 form-border mt30 border-blue pb20">
                         <nav className="row bar nav-black border-blue nav-font">
-                            <div className="col-md-2 mt10">PROJECT NAME</div>
-                            <div className="col-md-2 mt10">DESCRIPTION</div>
-                            <div className="col-md-2 mt10">SKILLS REQUIRED</div>
-                            <div className="col-md-2 mt10">EMPLOYER ID</div>
-                            <div className="col-md-1 mt10">BIDS COUNT</div>
-                            <div className="col-md-2 mt10">BID NOW</div>
+                            <div className="col-md-2 mt10">Project Name</div>
+                            <div className="col-md-2 mt10">Description</div>
+                            <div className="col-md-2 mt10">Skills Required</div>
+                            <div className="col-md-2 mt10">Employer</div>
+                            <div className="col-md-1 mt10">Number of Bids</div>
+                            <div className="col-md-2 mt10">Bid</div>
                         </nav>
                         <div className="mt20"></div>
                         {this.state.listOfProject.map((projectDetail,i) =>

@@ -34,7 +34,7 @@ export function getBids(project_id){
         return axios.get('/project/getBids',{
             params: {project_id: project_id}
         }).then((response)=>{
-            console.log("Bids List"+ JSON.stringify(response.data));
+            console.log("Bids List----------------------------"+ JSON.stringify(response.data));
             dispatch(bidsList(response.data));
         });
     }

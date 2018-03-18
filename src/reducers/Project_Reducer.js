@@ -3,6 +3,7 @@ import {combineReducers} from 'redux'
 
 export const data = (state =  {
     listOfProjects:[],
+    listOfProjects_emp:[],
     bidsList:[],
     projectData: {},
     message : ""
@@ -14,6 +15,7 @@ export const data = (state =  {
             state= {
                 ...state,
                 projectData:action.payload
+
             };
             console.log("inside PROJECT_INFO after setting",state);
 
@@ -28,7 +30,7 @@ export const data = (state =  {
             console.log("In emp project list info",action.payload.bList);
             state= {
                 ...state,
-                listOfProjects:action.payload.bList
+                listOfProjects_emp:action.payload.bList
             };
             break;
         case "FLCR_PROJ_LIST":
@@ -39,12 +41,12 @@ export const data = (state =  {
             };
             break;
         case "BIDS_LIST":
-            console.log("In reducer BIDS_LIST",action.payload);
+            console.log("In reducer BIDS_LIST",action.payload.bidsList);
             state= {
                 ...state,
-                bidsList:action.payload
+                bidsList:action.payload.bidsList
             };
-            console.log("In flcr project list info",state.bidsList);
+            console.log("In Bids  list info",state.bidsList);
             break;
 
         case "HIRE_INFO":
