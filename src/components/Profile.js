@@ -1,19 +1,16 @@
 import React from "react";
-//import {render} from "react-dom";
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import * as getData from '../actions/user_creadential_actions';
-//import feelancer from '../feelancer-LOGO.svg';
-//import {userData} from "../reducers/reducer-user";
 import Dropzone from 'react-dropzone';
 import {Link} from 'react-router-dom';
 
-class UserProfile extends React.Component {
+class Profile extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { redirect: false, profileImage:null ,preview: null, docs:null, docsPreview: null};
+        this.state = { redirect: false, profileImage:null ,preview: null, docs:null, docsPreview: null, imageURL:null, fdData: null};
         this.onImageDrop = this.onImageDrop.bind(this);
         this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
     }
@@ -44,6 +41,12 @@ class UserProfile extends React.Component {
     }
 
     updateUserDetails(){
+       /* ev.preventDefault();*/
+        /*console.log("inside update user details")
+        const data = new FormData();
+        data.append('file', this.uploadInput.files[0]);
+        data.append('filename', this.fileName.value);
+        console.log("File data : -----------",data);*/
         this.props.updateUser(this.state);
     }
 
@@ -56,10 +59,15 @@ class UserProfile extends React.Component {
     }
 
     fileSelectedHandler(e) {
+        /*const data = new FormData();*/
         this.state.docs = e.target.files[0];
+
         this.setState({
             docs: this.state.docs
-        })
+        });
+
+        /*data.append('file', this.state.docs);
+        data.append('filename', "file_1");*/
         console.log("selected file path : ",this.state.docs);
     }
 
@@ -70,7 +78,9 @@ class UserProfile extends React.Component {
         })
         console.log("Image file path : ",this.state.profileImage);
     }
-
+    nextPath(path) {
+        this.props.history.push(path);
+    }
 
     render(){
         const {redirect}  = this.state;
@@ -82,38 +92,43 @@ class UserProfile extends React.Component {
 
         return(
         <div>
+            <div className="App-header">
+                <button className="btn btn-primary logout-btn" onClick={this.logout.bind(this)}>Logout</button>
+            </div>
             <nav class="bar nav-black">
                 <Link to="/home" class="item-button bar-item ml75">Home</Link>
                 <Link to="/dashboard" class="item-button bar-item">Dashboard</Link>
-                <Link to="/profile" class="item-button bar-item">User Profile</Link>
+                <Link to="/profile" class="item-button bar-item">My Profile</Link>
+                <button className="btn-warning btn post-project-btn" onClick={() => this.nextPath('/post-project')}>Post Project</button>
             </nav>
             <div className="display-flex justify-content-md-center mt40">
                 <div className="col-md-8 form-border mt30">
-                    <div onClick={this.logout.bind(this)}>LOGOUT</div>
                     <div className="row">
-                        <label> Profile Image </label>
                         <br/>
                         { this.state.preview &&
-                        <img src={ this.state.preview } alt="image preview" />
-
+                        <img className="col-md-2 margin-left:100px" src={ this.state.preview } alt="image preview" />
                         }
-
                     </div>
                     <div className="row">
                         <Dropzone style="height: 50px"
                                   multiple={false}
                                   accept="image/*"
-                                  onDrop={this.onImageDrop}>
-                            <p><u>Click here</u> to upload a profile image</p>
+                                  onDrop={this.onImageDrop}
+                                  className="col-md-8">
+
+                            <label className="col-md-8" >
+                                <u>Click here</u> to upload a profile image
+                            </label>
                         </Dropzone>
                     </div>
                     <div className="row">
-                    <label>Name</label>
+                    <label className="col-md-3">Name</label>
                     <input
                         placeholder="Name"
-                        className="form-control  col-md-10"
+                        className="form-control col-md-3"
                         type="text"
                         label=""
+                        required
                         value={this.state.name}
                         onChange={(event) => {
                             this.setState({
@@ -123,12 +138,13 @@ class UserProfile extends React.Component {
                     />
                     </div>
                     <div className="row">
-                        <label>Email</label>
+                        <label className="col-md-3">Email</label>
                         <input
                             placeholder="Email"
-                            className="form-control  col-md-10"
-                            type="text"
+                            className="form-control  col-md-6"
+                            type="email"
                             label=""
+                            required
                             value={this.state.email}
                             onChange={(event) => {
                                 this.setState({
@@ -139,11 +155,12 @@ class UserProfile extends React.Component {
                         />
                     </div>
                     <div className="row">
-                        <label>Phone Number</label>
+                        <label className="col-md-3">Phone Number</label>
                         <input
                             placeholder="Phone Number"
-                            className="form-control  col-md-10"
-                            type="text"
+                            className="form-control  col-md-6"
+                            type="tel"
+                            required
                             label=""
                             value={this.state.phone}
                             onChange={(event) => {
@@ -154,11 +171,12 @@ class UserProfile extends React.Component {
                         />
                     </div>
                     <div className="row">
-                        <label>About Me</label>
+                        <label className="col-md-3">About Me</label>
                         <input
                             placeholder="About"
-                            className="form-control  col-md-10"
+                            className="form-control  col-md-6"
                             type="text"
+                            required
                             label=""
                             value={this.state.about}
                             onChange={(event) => {
@@ -169,11 +187,12 @@ class UserProfile extends React.Component {
                         />
                     </div>
                     <div className="row">
-                        <label>Skills</label>
+                        <label className="col-md-3">Skills</label>
                         <input
                             placeholder="Skills"
-                            className="form-control  col-md-10"
+                            className="form-control  col-md-6"
                             type="text"
+                            required
                             value={this.state.skills}
                             onChange={(event) => {
                                 this.setState({
@@ -184,7 +203,7 @@ class UserProfile extends React.Component {
                     </div>
                     <br/>
                     <div className="row">
-                        <label>Resume</label>
+                        <label className="col-md-3">Resume</label>
                         <input
                             type="file"
                             onChange={this.fileSelectedHandler.bind(this)}
@@ -193,8 +212,8 @@ class UserProfile extends React.Component {
                     { this.state.docsPreview &&
                     <img src={ this.state.docsPreview } alt="image preview" />
                     }
-                    <button className="btn btn-primary" onClick={this.updateUserDetails.bind(this)}>Update Details</button>
-                </div>
+                    <button onClick={this.updateUserDetails.bind(this)} className="btn btn-primary" >Update Details</button>
+                    </div>
             </div>
         </div>
         );
@@ -211,4 +230,4 @@ function mapDispatchToProps(dispatch){
     return bindActionCreators(getData,dispatch)
 
 }
-export default connect(mapStateToProps,mapDispatchToProps)(UserProfile);
+export default connect(mapStateToProps,mapDispatchToProps)(Profile);

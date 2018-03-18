@@ -1,5 +1,4 @@
 import React from "react";
-import {render} from "react-dom";
 import * as checkLoggedSession from "../actions/user_creadential_actions";
 import {userData} from "../reducers/User_Credential_Reducer";
 import {bindActionCreators} from 'redux'
@@ -8,7 +7,7 @@ import * as postData from "../actions/project_bid_actions";
 import {Redirect} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import feelancer from '../feelancer-LOGO.svg';
+import freelancer from '../freelancer.svg';
 
 class ViewDetails extends React.Component{
 
@@ -49,6 +48,10 @@ class ViewDetails extends React.Component{
         this.props.getOtherUserData(this.props.match.params.user_id);
     }
 
+    logout(){
+        this.props.logout();
+    }
+
     nextPath(path) {
         this.props.history.push(path);
     }
@@ -65,7 +68,8 @@ class ViewDetails extends React.Component{
         return(
             <div>
                 <div className="App-header">
-                    <img src={feelancer} className="App-logo" alt="logo" />
+                    <img src={freelancer} className="App-logo" alt="logo" />
+                    <button className="btn btn-primary logout-btn" onClick={this.logout.bind(this)}>Logout</button>
                 </div>
                 <nav class="bar nav-black">
                     <Link to="/home" class="item-button bar-item ml75">Home</Link>
