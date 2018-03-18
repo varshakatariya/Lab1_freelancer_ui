@@ -41,13 +41,7 @@ class Profile extends React.Component {
     }
 
     updateUserDetails(){
-       /* ev.preventDefault();*/
-        /*console.log("inside update user details")
-        const data = new FormData();
-        data.append('file', this.uploadInput.files[0]);
-        data.append('filename', this.fileName.value);
-        console.log("File data : -----------",data);*/
-        this.props.updateUser(this.state);
+       this.props.updateUser(this.state);
     }
 
     logout(){
@@ -66,8 +60,6 @@ class Profile extends React.Component {
             docs: this.state.docs
         });
 
-        /*data.append('file', this.state.docs);
-        data.append('filename', "file_1");*/
         console.log("selected file path : ",this.state.docs);
     }
 

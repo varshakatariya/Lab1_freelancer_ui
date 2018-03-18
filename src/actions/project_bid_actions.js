@@ -1,13 +1,14 @@
 import axios from "axios/index";
 
-
-export function postProject(projectData){
+export function hireFreelancer(hireData){
     return dispatch => {
-        return axios.post('/project/postProject',projectData).then((response)=>{
-            dispatch(projectInfo(response.data));
+        return axios.post('/project/hireFreelancer',hireData).then((response)=>{
+            dispatch(hireInfo(response.data));
         });
     }
 }
+
+
 
 export function getProjectDataForHome(){
     return dispatch => {
@@ -23,8 +24,8 @@ export function getProjectDetails(project_id){
         return axios.get('/project/getProjectDetails',{
             params: {project_id: project_id}
         }).then((response)=>{
-            console.log("home data"+ JSON.stringify(response.data));
-            dispatch(projectInfo(response.data));
+            console.log("home project data"+ JSON.stringify(response.data));
+           dispatch(projectInfo(response.data));
         });
     }
 }
@@ -33,16 +34,17 @@ export function getBids(project_id){
         return axios.get('/project/getBids',{
             params: {project_id: project_id}
         }).then((response)=>{
+            console.log("Bids List"+ JSON.stringify(response.data));
             dispatch(bidsList(response.data));
         });
     }
 }
 
-export function bidProjectNow(){
+export function bidProjectNow(bidData){
     return dispatch => {
-        return axios.post('/project/bidProjectNow').then((response)=>{
+        return axios.post('/project/bidProjectNow',bidData).then((response)=>{
             console.log("Bid Now data"+ JSON.stringify(response.data));
-            dispatch(projectListInfo(response.data));
+            //dispatch(projectListInfo(response.data));
         });
     }
 }
@@ -65,6 +67,14 @@ export function getListOfProjectPostedByEmployer(){
     }
 }
 
+export function postProject(projectData){
+    return dispatch => {
+        return axios.post('/project/postProject',projectData).then((response)=>{
+            dispatch(projectInfo(response.data));
+        });
+    }
+}
+
 export function projectInfo(values){
     return{
         type:"PROJECT_INFO",
@@ -73,7 +83,6 @@ export function projectInfo(values){
 }
 
 export function projectListInfo(values){
-
     console.log("Inside projectListInfo",values);
     return{
         type:"PROJECT_LIST_INFO",
@@ -101,6 +110,13 @@ export function flcrProjectListInfo(values){
 export function bidsList(values){
     return{
         type:"BIDS_LIST",
+        payload:values
+    }
+}
+
+export function hireInfo(values){
+    return{
+        type:"HIRE_INFO",
         payload:values
     }
 }

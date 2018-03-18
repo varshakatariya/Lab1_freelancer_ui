@@ -1,9 +1,7 @@
 import React from "react";
-import {render} from "react-dom";
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import feelancer from '../feelancer-LOGO.svg';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import axios from 'axios';
 import * as postData from "../actions/project_bid_actions";
 import * as checkLoggedSession from "../actions/user_creadential_actions";
@@ -23,12 +21,14 @@ class PostProject extends React.Component{
             skills: "",
             budget:"Basic",
             endDate:moment(),
+            errors:"",
+            redirectHome:false,
             optionsdata: [
-                {key:'Basic',value: 'Basic ($2 - $8 USD)'},
-                {key:'Moderate',value: 'Moderate ($8 - $15 USD)'},
-                {key:'Standard',value: 'Standard ($15 - $25 USD)'},
-                {key:'Skilled',value: 'Skilled ($25 - $50 USD)'},
-                {key:'Expert',value: 'Expert ($50 + USD)'}
+                {key:'Basic ($2 - $8 USD)',value: 'Basic ($2 - $8 USD)'},
+                {key:'Moderate ($8 - $15 USD)',value: 'Moderate ($8 - $15 USD)'},
+                {key:'Standard ($15 - $25 USD)',value: 'Standard ($15 - $25 USD)'},
+                {key:'Skilled ($25 - $50 USD)',value: 'Skilled ($25 - $50 USD)'},
+                {key:'Expert ($50 + USD)',value: 'Expert ($50 + USD)'}
             ],
             projectFiles:null
         }
@@ -63,7 +63,17 @@ class PostProject extends React.Component{
     }
 
     postProject(e){
-        this.props.postProject(this.state);
+        e.preventDefault();
+        this.props.postProject(this.state).then(
+            (data) => {
+                this.setState({
+                   redirectHome: true
+                })
+            },
+            (err) => {this.setState({errors : err.response.data.errors})
+                console.log(err.response.data.errors);}
+
+        );
     }
 
     handleChange = (e) => {
@@ -77,6 +87,11 @@ class PostProject extends React.Component{
 
     }
 
+    logout(){
+        this.props.logout();
+    }
+
+
     fileSelectedHandler(e) {
         this.state.projectFiles = e.target.files[0];
         this.setState({
@@ -87,15 +102,30 @@ class PostProject extends React.Component{
     render(){
 
         const { userData } = this.props;
-        if(this.state.redirect)
+        if(this.state.redirect || userData.data.logout === true)
             return (<Redirect to={{
                 pathname: '/login'
             }} />)
+        if(this.state.redirectHome)
+            return (<Redirect to={{
+                pathname: '/home'
+            }} />)
+        const {errors} = this.state;
 
         return(
             <div>
+                <div className="App-header">
+                    <button className="btn btn-primary logout-btn" onClick={this.logout.bind(this)}>Logout</button>
+                </div>
+                <nav class="bar nav-black">
+                    <Link to="/home" class="item-button bar-item ml75">Home</Link>
+                    <Link to="/dashboard" class="item-button bar-item">Dashboard</Link>
+                    <Link to="/profile" class="item-button bar-item">User Profile</Link>
+                </nav>
                 <div className="display-flex justify-content-md-center mt40">
                     <div className="col-md-8 mt30 align-left">
+                        <form  onSubmit={this.postProject.bind(this)}>
+                        {errors && <div className="help-block">{errors}</div>}
                         <div className="mb30">
                             <h4>Tell us what you need done</h4>
                             <label>Get free quotes from skilled freelancers within minutes, view profiles, ratings and portfolios and chat with them. Pay the freelancer only when you are 100% satisfied with their work.</label>
@@ -106,7 +136,9 @@ class PostProject extends React.Component{
                                 placeholder="e.g Build me a website"
                                 className="form-control  col-md-10"
                                 type="text"
+                                required
                                 label=""
+                                required
                                 onChange={(event) => {
                                     this.setState({
                                         projectName : event.target.value
@@ -120,6 +152,7 @@ class PostProject extends React.Component{
                             <textarea
                                 className="col-md-10"
                                 name="body"
+                                required
                                 placeholder="Describe your project here..."
                                 onChange={(event) => {
                                     this.setState({
@@ -136,6 +169,7 @@ class PostProject extends React.Component{
                                 placeholder="What skills are required?"
                                 className="form-control  col-md-10"
                                 type="text"
+                                required
                                 label=""
                                 value={this.state.skills}
                                 onChange={(event) => {
@@ -147,7 +181,7 @@ class PostProject extends React.Component{
                         </div>
                         <div className="mb30" onChange={this.handleChange}>
                             <h4>What is your estimated budget?</h4>
-                            <select className="select-style" onChange={this.handleChange}>
+                            <select className="select-style" required onChange={this.handleChange}>
                                 {this.state.optionsdata.map(function(data, key){  return (
                                     <option key={key} value={data.key}>{data.value}</option> )
                                 })}
@@ -155,7 +189,7 @@ class PostProject extends React.Component{
                         </div>
                         <div className="mb30">
                             <h4>When do you want the project completed?</h4>
-                            <DatePicker
+                            <DatePicker  required
                                 selected={this.state.endDate}
                                 onChange={this.handleDateChange.bind(this)}
                             />
@@ -168,8 +202,10 @@ class PostProject extends React.Component{
                                 onChange={this.fileSelectedHandler.bind(this)}
                             />
                         </div>
-                        <button className="btn btn-warning mb30" onClick={this.postProject.bind(this)}>Post My Project</button>
+                        <button className="btn btn-warning mb30">Post My Project</button>
+                        </form>
                     </div>
+
                 </div>
             </div>
         );

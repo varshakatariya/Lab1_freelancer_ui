@@ -1,14 +1,10 @@
 import React from "react";
-import {render} from "react-dom";
-import axios from "axios";
-import PropTypes from 'prop-types';
 import * as checkLoggedSession from "../actions/user_creadential_actions";
 import {userData} from "../reducers/User_Credential_Reducer";
 import {bindActionCreators} from 'redux'
 import {connect} from "react-redux";
 import * as postData from "../actions/project_bid_actions";
 import {Redirect} from 'react-router-dom';
-import {Link} from 'react-router-dom';
 
 class Dashboard_Freelancer extends React.Component{
     constructor(props){

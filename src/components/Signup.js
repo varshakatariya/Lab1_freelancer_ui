@@ -1,11 +1,10 @@
 import React from "react";
-//import {render} from "react-dom";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {userSignUp} from '../actions/user_creadential_actions';
 import {Link} from 'react-router-dom';
-import feelancer from '../feelancer-LOGO.svg';
+import freelancer from '../freelancer.svg';
 
 class Signup extends React.Component{
 
@@ -49,10 +48,10 @@ class Signup extends React.Component{
             <div className="display-flex justify-content-md-center mt40">
                 <div className="col-md-4 form-border mt30">
                     <form className="" onSubmit={this.signUp.bind(this)}>
-                        <img src={feelancer} className="freelance-logo mt20" alt="logo"/>
+                        <img src={freelancer} className="freelance-logo mt20" alt="logo"/>
                         <hr/>
                         <div>
-                            <h5>Sign Up for free today!</h5>
+                            <h5>Sign Up for <i>free</i> today!</h5>
                         </div>
                         <hr/>
                         <div>
@@ -61,6 +60,7 @@ class Signup extends React.Component{
                                     placeholder="Name"
                                     className="form-control  col-md-10"
                                     type="text"
+                                    required
                                     label=""
                                     name="name"
                                     onChange={this.onChange.bind(this)}
@@ -70,7 +70,8 @@ class Signup extends React.Component{
                                 <input
                                     placeholder="Email Address"
                                     className="form-control col-md-10"
-                                    type="text"
+                                    type="email"
+                                    required
                                     label=""
                                     name="email"
                                     onChange={this.onChange.bind(this)}
@@ -82,6 +83,7 @@ class Signup extends React.Component{
                                     className="form-control col-md-10"
                                     type="password"
                                     label=""
+                                    required
                                     name="password"
                                     onChange={this.onChange.bind(this)}
                                 />
@@ -90,6 +92,7 @@ class Signup extends React.Component{
 
                         <button className="btn btn-primary mt20 col-md-8">Submit</button>
                         <hr/>
+                        <br/>
                         <label>Already a member? <Link to='/login'>Log In</Link></label>
                     </form>
                 </div>

@@ -1,10 +1,7 @@
 
 import {combineReducers} from 'redux'
 
-
-
-
-export const data = (state =  {
+export const userData = (state =  {
     email: "",
     name: ""
 }, action) =>{
@@ -25,5 +22,5 @@ export const data = (state =  {
     return state;
 }
 export default combineReducers({
-    data
+    userData
 });

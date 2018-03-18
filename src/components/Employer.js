@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import freelancer from '../freelancer.svg';
 
-class ViewDetails extends React.Component{
+class Employer extends React.Component{
 
     state={
         redirect:false,
@@ -120,8 +120,8 @@ function mapDispatchToProps(dispatch){
     return bindActionCreators(Object.assign({}, postData,checkLoggedSession),dispatch)
 
 }
-export default connect(mapStateToProps,mapDispatchToProps)(ViewDetails);
+export default connect(mapStateToProps,mapDispatchToProps)(Employer);
 
-ViewDetails.propTypes = {
+Employer.propTypes = {
     user_id: PropTypes.string
 };

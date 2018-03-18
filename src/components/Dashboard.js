@@ -1,7 +1,4 @@
 import React from "react";
-import {render} from "react-dom";
-import axios from "axios";
-import PropTypes from 'prop-types';
 import * as checkLoggedSession from "../actions/user_creadential_actions";
 import {userData} from "../reducers/User_Credential_Reducer";
 import {bindActionCreators} from 'redux'
@@ -10,8 +7,7 @@ import * as postData from "../actions/project_bid_actions";
 import {Redirect} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import Dashboard_Employer from './Dashboard_Employer';
-import Dashboard_Freelancer from './Dashboard_Freelancer';
-
+import Dashboard_Freelancer from './Dashboard_Freelancer';;
 
 class Dashboard extends React.Component{
     constructor(props){
@@ -53,37 +49,50 @@ class Dashboard extends React.Component{
         this.props.getListProjectUserHasBidOn();
     }
 
-    onHandleChangeFreelancer(){
+    componentDidMount(){
         var x = document.getElementById("freelancerView");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
+        x.style.display = "none";
+    }
+
+    onHandleChangeFreelancer(){
+        var x = document.getElementById("employerView");
+        var y = document.getElementById("freelancerView");
+        x.style.display = "block";
+        y.style.display = "none";
     }
     onHandleChangeEmployer(){
-        var x = document.getElementById("employerView");
-        if (x.style.display === "none") {
-            x.style.display = "block";
-
-        } else {
-            x.style.display = "none";
-        }
+        var x = document.getElementById("freelancerView");
+        var y = document.getElementById("employerView");
+        x.style.display = "block";
+        y.style.display = "none";
     }
+
+    nextPath(path) {
+        this.props.history.push(path);
+    }
+
+    logout(){
+        this.props.logout();
+    }
+
 
     render() {
 
         const { userData } = this.props;
-        if(this.state.redirect)
+        if(this.state.redirect  || userData.data.logout === true)
             return (<Redirect to={{
                 pathname: '/login'
             }} />)
         return (
             <div>
+                <div className="App-header">
+                    <button className="btn btn-primary logout-btn" onClick={this.logout.bind(this)}>Logout</button>
+                </div>
                 <nav class="bar nav-black">
                     <Link to="/home" class="item-button bar-item ml75">Home</Link>
                     <Link to="/dashboard" class="item-button bar-item">Dashboard</Link>
-                    <Link to="/profile" class="item-button bar-item">User Profile</Link>
+                    <Link to="/profile" class="item-button bar-item">My Profile</Link>
+                    <button className="btn-warning btn post-project-btn" onClick={() => this.nextPath('/post-project')}>Post Project</button>
                 </nav>
 
                 <br/>
@@ -95,10 +104,11 @@ class Dashboard extends React.Component{
                     <input type="Radio" name="view" onClick={this.onHandleChangeEmployer.bind()}></input> Employer
                 </label>
 
-                <div id="freelancerView">
-                    <Dashboard_Freelancer/>
-                </div>
                 <div id="employerView">
+                    <Dashboard_Freelancer/>
+
+                </div>
+                <div id="freelancerView">
                     <Dashboard_Employer/>
                 </div>
             </div>

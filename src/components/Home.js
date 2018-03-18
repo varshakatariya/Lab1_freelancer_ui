@@ -1,7 +1,4 @@
 import React from "react";
-import {render} from "react-dom";
-import axios from "axios";
-import PropTypes from 'prop-types';
 import * as checkLoggedSession from "../actions/user_creadential_actions";
 import {userData} from "../reducers/User_Credential_Reducer";
 import {bindActionCreators} from 'redux'
@@ -38,6 +35,7 @@ class Home extends React.Component{
             }
         }
         if(nextProps.projectData){
+            console.log("Project data :  ---------------------------   ",nextProps.projectData.data.listOfProjects);
             this.setState({
                 listOfProject : nextProps.projectData.data.listOfProjects
             });
@@ -90,10 +88,18 @@ class Home extends React.Component{
         });
     }
 
+    nextPath(path) {
+        this.props.history.push(path);
+    }
+
+    logout(){
+        this.props.logout();
+    }
+
     render() {
 
         const { userData } = this.props;
-        if(this.state.redirect)
+        if(this.state.redirect || userData.data.logout === true)
             return (<Redirect to={{
                 pathname: '/login'
             }} />)
@@ -101,54 +107,58 @@ class Home extends React.Component{
 
         return (
             <div>
+                <div className="App-header">
+                    <button className="btn btn-primary logout-btn" onClick={this.logout.bind(this)}>Logout</button>
+                </div>
                 <nav class="bar nav-black">
                     <Link to="/home" class="item-button bar-item ml75">Home</Link>
                     <Link to="/dashboard" class="item-button bar-item">Dashboard</Link>
-                    <Link to="/profile" class="item-button bar-item">User Profile</Link>
+                    <Link to="/profile" class="item-button bar-item">My Profile</Link>
+                    <button className="btn-warning btn post-project-btn" onClick={() => this.nextPath('/post-project')}>Post Project</button>
                 </nav>
                 <div className="display-flex justify-content-md-center mt40">
-                    <div className="col-md-11 form-border mt30">
-                        <nav className="row bar nav-black">
-                            <div className="col-md-2 mt10">Project Name</div>
-                            <div className="col-md-2 mt10">Description</div>
-                            <div className="col-md-2 mt10">Skills Required</div>
-                            <div className="col-md-2 mt10">Employer ID</div>
-                            <div className="col-md-1 mt10">Bids Count</div>
-                            <div className="col-md-2 mt10">Bid Now</div>
+                    <div className="col-md-11 form-border mt30 border-blue pb20">
+                        <nav className="row bar nav-black border-blue nav-font">
+                            <div className="col-md-2 mt10">PROJECT NAME</div>
+                            <div className="col-md-2 mt10">DESCRIPTION</div>
+                            <div className="col-md-2 mt10">SKILLS REQUIRED</div>
+                            <div className="col-md-2 mt10">EMPLOYER ID</div>
+                            <div className="col-md-1 mt10">BIDS COUNT</div>
+                            <div className="col-md-2 mt10">BID NOW</div>
                         </nav>
                         <div className="mt20"></div>
                         {this.state.listOfProject.map((projectDetail,i) =>
                             <h5 key={i}>
                                 <div className="row row-border mt20 ml7 mr7">
-                                    <Link to={'/project-details/'+projectDetail.project_id} className="col-md-2 mt15 mb15">{projectDetail.title}</Link>
-                                    <div className="col-md-2 mt15 mb15">{projectDetail.description}</div>
-                                    <div className="col-md-2 mt15 mb15">{projectDetail.skills}</div>
-                                    <Link to={'/view-details/'+projectDetail.employer_id} className="col-md-2 mt15 mb15">{projectDetail.employer_name}</Link>
-                                    <div className="col-md-1 mt15 mb15">{projectDetail.avg_bid}</div>
-                                    <div className="col-md-2 mt15 mb15 ml60">
-                                        <button className="btn btn-primary" onClick={() => this.bid(projectDetail.project_id)}>Bid Project</button>
-                                        <div id={"bid-details"+projectDetail.project_id} className="mt10" style={{display:'none'}}>
-                                            <input
-                                                placeholder="Enter Period"
-                                                className="form-control col-md-10 mt10"
-                                                type="text"
-                                                name="period_in_days"
-                                                required
-                                                label=""
-                                                onChange={this.onChange.bind(this)}
-                                            />
-                                            <input
-                                                placeholder="Enter Amount"
-                                                className="form-control col-md-10 mt10"
-                                                type="text"
-                                                name="bid_price"
-                                                required
-                                                label=""
-                                                onChange={this.onChange.bind(this)}
-                                            />
-                                            <button className="btn btn-primary mt10" onClick={() => this.bidNow(projectDetail.project_id)}>Bid Now</button>
-                                        </div>
+                                <Link to={'/project-details/'+projectDetail.project_id} className="col-md-2 mt15 mb15">{projectDetail.title}</Link>
+                                <div className="col-md-2 mt15 mb15">{projectDetail.description}</div>
+                                <div className="col-md-2 mt15 mb15">{projectDetail.skills}</div>
+                                <Link to={'/view-details/'+projectDetail.employer_id} className="col-md-2 mt15 mb15">{projectDetail.employer_name}</Link>
+                                <div className="col-md-1 mt15 mb15">{projectDetail.avg_bid}</div>
+                                <div className="col-md-2 mt15 mb15 ml60">
+                                    <button className="btn btn-primary" onClick={() => this.bid(projectDetail.project_id)}>Bid Project</button>
+                                    <div id={"bid-details"+projectDetail.project_id} className="mt10" style={{display:'none'}}>
+                                    <input
+                                        placeholder="Enter Period"
+                                        className="form-control col-md-10 mt10"
+                                        type="text"
+                                        name="period_in_days"
+                                        required
+                                        label=""
+                                        onChange={this.onChange.bind(this)}
+                                        />
+                                    <input
+                                        placeholder="Enter Amount"
+                                        className="form-control col-md-10 mt10"
+                                        type="text"
+                                        name="bid_price"
+                                        required
+                                        label=""
+                                        onChange={this.onChange.bind(this)}
+                                        />
+                                        <button className="btn btn-primary mt10" onClick={() => this.bidNow(projectDetail.project_id)}>Bid Now</button>
                                     </div>
+                                </div>
                                 </div>
                             </h5>)}
                     </div>

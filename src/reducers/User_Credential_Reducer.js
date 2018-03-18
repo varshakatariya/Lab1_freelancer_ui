@@ -23,7 +23,7 @@ export const data = (state =  {
                 profileImage: action.payload.profileImage
             };
             console.log("In User info after",state);
-break;
+            break;
 
         case "LOGOUT":
             console.log("in logout"+action.payload.logout);
@@ -31,13 +31,14 @@ break;
                 ...state,
                 logout:action.payload.logout
             };
-
+            break;
         case "SESSION_INFO":
             console.log("in logout"+action.payload.logout);
             state= {
                 ...state,
                 sessionActive:action.payload.sessionActive
             };
+            break;
 
         default:
             return state;

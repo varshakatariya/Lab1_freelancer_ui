@@ -51,6 +51,16 @@ export function getUserData(){
     }
 }
 
+export function getOtherUserData(user_id){
+    return dispatch => {
+        return axios.get('/users/getUserData',{
+            params: {user_id: user_id}
+        }).then((response)=>{
+            dispatch(userInfo(response.data));
+        });
+    }
+}
+
 export function userInfo(values){
     return{
         type:"USER_INFO",

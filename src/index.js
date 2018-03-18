@@ -11,6 +11,9 @@ import allReducers from './reducers';
 const middlewares = applyMiddleware(thunk);
 const store = createStore(allReducers,middlewares);
 
-ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <App/>
+    </Provider>, document.getElementById('root'));
 registerServiceWorker();
 

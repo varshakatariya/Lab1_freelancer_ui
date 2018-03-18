@@ -1,10 +1,9 @@
 import React from "react";
-import {render} from "react-dom";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {userLogin} from '../actions/user_creadential_actions';
-import feelancer from '../feelancer-LOGO.svg';
+import freelancer from '../freelancer.svg';
 import {Link} from 'react-router-dom';
 
 
@@ -47,11 +46,12 @@ class Login extends React.Component{
         return(
             <div className="display-flex justify-content-md-center mt40">
                 <div className="col-md-4 form-border mt30 form-height">
-                    <form className="" onSubmit={this.login.bind(this)}>
-                        <img src={feelancer} className="freelance-logo mt20" alt="logo"/>
+                    <form className="ml50" onSubmit={this.login.bind(this)}>
+                        <img src={freelancer} className="freelance-logo mt20 ml50" alt="logo"/>
                         <hr/>
+                        {errors && <div className="help-block">{errors}</div>}
                         <div>
-                            <h5>Log In here</h5>
+                            <h5>Log In to Start</h5>
                         </div>
                         <hr/>
                         <div>
@@ -79,7 +79,8 @@ class Login extends React.Component{
 
                         <button className="btn btn-primary mt20 col-md-8">Log In</button>
                         <hr/>
-                        <label>Dont have an account? <Link to="/signup">Sign Up</Link></label>
+                        <br/>
+                        <label>Don't have an account? <Link to="/signup">Sign Up</Link></label>
                     </form>
                 </div>
             </div>

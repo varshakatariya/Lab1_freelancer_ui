@@ -1,53 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 35px;
-  float:left;
-  margin-left:60px;
-}
-
-.App-header {
-  height: 50px;
-  margin: 20px;
-}
-
-.App-title {
-  font-size: 1.5em;
-    margin-top:0px
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-.form-border{
-    border-radius:4px;
-    height:550px;
-    background-color: #fff;
-    box-shadow: 0 0 4px 0 rgba(0,0,0,.08), 0 2px 4px 0 rgba(0,0,0,.12);
-}
-.freelance-logo{
-    height:40px;
-}
-.display-flex{
-    display: flex;
-}
-.mt40{
-    margin-top:40px;
-}
-.mt20{
-    margin-top:20px;
-}
-.input-type{
-    margin-left:60px;
-    margin-top:20px;
-}
 body{
     background-color: #F0F0F0;
 }
@@ -81,6 +31,7 @@ textarea{
 }
 .btn-warning{
     color: white;
+    background-color: #f77d0e;
     font-weight: 600;
 }
 .select-style{
@@ -117,8 +68,11 @@ textarea{
     margin-left:75px;
 }
 .row-border{
-    border: 1px solid;
+    border: 1px solid #0087e0;
     border-radius: 4px;
+}
+.border-blue{
+    border: 1px solid #0087e0;
 }
 .ml7{
     margin-left:7px;
@@ -126,8 +80,20 @@ textarea{
 .mr7{
     margin-right:7px;
 }
+.mr120{
+    margin-right:120px;
+}
+.mr88{
+    margin-right:88px;
+}
+.mr50{
+    margin-right:50px;
+}
 .mt15{
     margin-top:15px;
+}
+.pb20{
+    padding-bottom:20px;
 }
 .mb15{
     margin-bottom: 15px;
@@ -137,4 +103,127 @@ textarea{
 }
 .mt10{
     margin-top:10px;
+}
+.font-bold{
+    font-weight:700;
+}
+.mt50{
+    margin-top:50px;
+}
+.mb10{
+    margin-bottom: 10px;
+}
+.help-block{
+    border: 1px solid red;
+    background-color: antiquewhite;
+    color: red;
+    border-radius: 4px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.post-project-btn{
+      float: right;
+      margin-right: 150px;
+}
+.fr{
+    float:right;
+}
+.mlr30{
+    margin-left: 30px;
+    margin-right: 30px;
+    width:150px;
+}
+.nav-font{
+    font-size: 14px;
+    font-weight: 600;
+}
+.success-block{
+    border: 1px solid #9bfb81;
+    background-color: #4b883a;
+    color: #9bfb81;
+    border-radius: 4px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.logout-btn{
+    float: right;
+    margin-right: 120px;
+    width:90px !important;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+}
+
+.top-right1 {
+    position: absolute;
+    top: 20px;
+    right: 350px;
+    font-size: 16px;
+    color: black;
+}
+.top-right2 {
+    position: absolute;
+    top: 20px;
+    right: 250px;
+    font-size: 16px;
+    color: black;
+}
+ml50{
+    left: 50px;
+}
+.freelance-logo{
+    height:40px;
+}
+.display-flex{
+    display: flex;
+}
+.mt40{
+    margin-top:40px;
+}
+.mt20{
+    margin-top:20px;
+}
+.input-type-ml30{
+    margin-left:30px;
+    margin-top:20px;
+}
+.input-type {
+    margin-left: 60px;
+    margin-top: 20px;
+}
+
+.App-header {
+    height: 40px;
+    margin: 20px;
+}
+
+.App-title {
+    font-size: 1.5em;
+    margin-top:0px
+}
+
+.App-intro {
+    font-size: large;
+}
+
+@keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.form-border{
+    border-radius:4px;
+    background-color: #fff;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,.08), 0 2px 4px 0 rgba(0,0,0,.12);
+}
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 35px;
+    float:left;
+    margin-left:60px;
 }
