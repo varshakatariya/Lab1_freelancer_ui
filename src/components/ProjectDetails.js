@@ -108,30 +108,30 @@ class ProjectDetails extends React.Component{
                 </nav>
                 <div className="display-flex justify-content-md-center mt40">
                     <div className="col-md-8  justify-content-md-center form-border mt30">
-                        <h3 className="mb30 mt50">Project Details</h3>
+                        <h3 className="mb30 mt50 col-md-4">Project Details</h3>
                         <div className="col-md-offset-5 mt50">
-                            <label className="font-bold">Project Name : </label>
-                            <label>{this.state.projectDetails.projectName}</label>
+                            <label className="font-bold col-md-3">Project Name : </label>
+                            <label className="col-md-3">{this.state.projectDetails.projectName}</label>
                         </div>
                         <div className="col-md-offset-5 mt20">
-                            <label className="font-bold">Description : </label>
-                            <label>{this.state.projectDetails.description}</label>
+                            <label className="font-bold col-md-3">Description : </label>
+                            <label className="col-md-3">{this.state.projectDetails.description}</label>
                         </div>
                         <div className="col-md-offset-5 mt20">
-                            <label className="font-bold">Skills Required : </label>
-                            <label>{this.state.projectDetails.skills}</label>
+                            <label className="font-bold col-md-3">Skills Required : </label>
+                            <label className="col-md-3">{this.state.projectDetails.skills}</label>
                         </div>
                         <div className="col-md-offset-5 mt20">
-                            <label className="font-bold">Budget Range : </label>
-                            <label>{this.state.projectDetails.budget}</label>
+                            <label className="font-bold col-md-3">Budget Range : </label>
+                            <label className="col-md-3">{this.state.projectDetails.budget}</label>
                         </div>
                         <div className="col-md-offset-5 mt20">
-                            <label className="font-bold">Average Bid : </label>
-                            <label>{this.state.projectDetails.numberOfBids}</label>
+                            <label className="font-bold col-md-3">Average Bid : </label>
+                            <label className="col-md-3">{this.state.projectDetails.numberOfBids}</label>
                         </div>
                         <hr/>
                         <br/>
-                        <h3 className="mb30">List of all bids</h3>
+                        <h3 className="mb30 col-md-5">Bids On Project</h3>
                         {errors && <div className="help-block">{errors}</div>}
                         {this.state.message && <div className="success-block">{this.state.message}</div>}
                         <div className="mt30">

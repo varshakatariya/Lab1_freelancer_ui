@@ -12,7 +12,7 @@ export function hireFreelancer(hireData){
 
 export function getProjectDataForHome(){
     return dispatch => {
-        return axios.get('/project/userAsFreelancerProjects').then((response)=>{
+        return axios.get('/project/getAllOpenProjects').then((response)=>{
             console.log("home data"+ JSON.stringify(response.data));
             dispatch(projectListInfo(response.data));
         });
